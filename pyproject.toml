@@ -3,16 +3,40 @@ name = "pythonproject3"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Артём Петров ",email = "roman1artem2haha@gmail.com"}
+    {name = "Артём Петров ", email = "roman1artem2haha@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-    "flake8 (>=7.2.0,<8.0.0)",
-    "pytest (>=8.3.5,<9.0.0)"
-]
-
+dependencies = []
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 119
+target-version = ['py313']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 119
+
+[tool.mypy]
+python_version = "3.13"
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+ignore_missing_imports = true
+exclude = [".venv"]
+
+[tool.flake8]
+max-line-length = 119
+ignore = ["E203", "E266", "E501", "W503", "W391", "F811", "W291", "F841"]
+exclude = [".venv", ".venv/Lib/site-packages", "*/migrations/*"]
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+isort = "^6.0.1"
+mypy = "^1.15.0"
+

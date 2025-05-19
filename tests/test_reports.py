@@ -1,5 +1,4 @@
 from datetime import datetime
-from unittest.mock import MagicMock, patch
 
 import pandas as pd
 
@@ -15,7 +14,6 @@ def test_search_category() -> None:
     transactions = pd.DataFrame(test_data)
     transactions["Дата операции"] = pd.to_datetime(transactions["Дата операции"])
 
-    with patch("builtins.open", new_callable=MagicMock()) as mock_open:
-        result = search_category(transactions, "еда", datetime(2022, 1, 10))
-        assert result["category"] == "еда"
-        assert result["total"] == -100
+    result = search_category(transactions, "еда", datetime(2022, 1, 10))
+    assert result["category"] == "еда"
+    assert result["total"] == -100

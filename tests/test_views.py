@@ -12,8 +12,12 @@ from src.views import card_info, currency_rate, send_greeting, stock_currency, s
 
 @fixture()
 def date_with_data() -> Any:
-    return read_files("data/operations.xls")
-
+    try:
+        data = read_files("data/operations.xls")
+        return data
+    except Exception as e:
+        print(f"Ошибка при чтении файла в fixture: {e}")
+        raise
 
 @patch("yfinance.Ticker")
 def test_stock_currency(mock_yfinance: Any) -> None:
@@ -27,7 +31,9 @@ def test_stock_currency(mock_yfinance: Any) -> None:
 
 
 def test_total_sum_amount(date_with_data: Any) -> None:
-    assert sum_amount_of_card(date_with_data, "*7197") == -1928562
+    print(f"test_total_sum_amount: date_with_data = {date_with_data}")
+    data = date_with_data
+    assert sum_amount_of_card(data, "*7197") == -1928562
 
 
 def test_get_cashback() -> None:
@@ -36,7 +42,9 @@ def test_get_cashback() -> None:
 
 
 def test_get_card_number(date_with_data: Any) -> None:
-    assert card_info(date_with_data) == "*7197"
+    print(f"test_get_card_number: date_with_data = {date_with_data}")
+    data = date_with_data
+    assert card_info(data) == "*7197"
 
 
 def test_get_stock_currency() -> None:

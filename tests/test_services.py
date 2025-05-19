@@ -1,4 +1,3 @@
-
 from src.services import filter_state
 
 

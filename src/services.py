@@ -1,3 +1,4 @@
+import json
 from typing import Any
 
 from src.utils import setup_logging, write_data
@@ -5,17 +6,17 @@ from src.utils import setup_logging, write_data
 logger = setup_logging()
 
 
-def filter_state(operations: list[dict[Any, Any]]) -> list:
+def filter_state(operations: list[dict[Any, Any]], category: str = "Переводы") -> str:
     """Функция, которая принимает на вход список транзакций
     и возвращает новый список, содержащий только те словари, у которых ключ содержит переданное в функцию значение."""
     result = []
     for operation in operations:
-        if "Переводы" in operation["Категория"]:
+        if category in operation["Категория"]:
             if operation["Описание"].endswith("."):
                 result.append(operation)
     logger.info("Результат 'filter_state' - %s" % result)
     write_data("servies.json", result)
-    return result
+    return json.dumps(result, ensure_ascii=False, indent=4)
 
 
 def servies_() -> None:

@@ -161,3 +161,5 @@ def views_() -> None:
     created = create_operations(greetin, card_numbers, total_sum, cashbacks, top)
     write_data("views.json", created)
     print(f'Главная:{read_files("views.json")}')
+
+    return json.dumps(created, indent=4, ensure_ascii=False)

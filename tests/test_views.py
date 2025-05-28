@@ -19,6 +19,7 @@ def date_with_data() -> Any:
         print(f"Ошибка при чтении файла в fixture: {e}")
         raise
 
+
 @patch("yfinance.Ticker")
 def test_stock_currency(mock_yfinance: Any) -> None:
     # Создаем объект DataFrame, который будет возвращен моком
